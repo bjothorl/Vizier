@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
+import AppButton from "./AppButton";
 import SendUDPButton from "./SendUDPButton";
-export default function CameraView({ address, port }) {
+export default function CameraView({ address, port, onEditPress }) {
   // const address = "127.0.0.1";
 
   let buttons = [];
@@ -17,7 +18,14 @@ export default function CameraView({ address, port }) {
           // resizeMode="contain"
           style={styles.image}
           source={require("../assets/live.jpg")}
-        ></ImageBackground>
+        >
+          <AppButton
+            title="edit effect"
+            style={styles.editEffectButton}
+            onPress={onEditPress}
+            bang={false}
+          />
+        </ImageBackground>
       </View>
 
       <View style={styles.effectBank}>
@@ -28,6 +36,7 @@ export default function CameraView({ address, port }) {
             port={port}
             key={id}
             style={styles.button}
+            bang={false}
           />
         ))}
       </View>
@@ -43,6 +52,8 @@ const styles = StyleSheet.create({
     height: "60%",
   },
   image: {
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
     width: "100%",
     height: "100%",
   },
@@ -56,6 +67,11 @@ const styles = StyleSheet.create({
   button: {
     width: "27%",
     height: "40%",
+    margin: 5,
+  },
+  editEffectButton: {
+    width: "27%",
+    height: "20%",
     margin: 5,
   },
 });

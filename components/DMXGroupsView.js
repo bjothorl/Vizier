@@ -17,6 +17,7 @@ export default function DMXGroupsView({ address, port }) {
           address={address}
           port={port}
           style={styles.button}
+          bang={false}
         />
       ))}
       <SendUDPButton
@@ -24,7 +25,7 @@ export default function DMXGroupsView({ address, port }) {
         address={address}
         port={4471}
         style={styles.button}
-        bang={true}
+        bang={false}
       />
     </View>
   );

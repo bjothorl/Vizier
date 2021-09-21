@@ -14,7 +14,7 @@ export default function SendUDPButton({ title, style, address, port, bang }) {
 
   return (
     <AppButton
-      style={[style, { backgroundColor: toggle ? "lime" : "lightgrey" }]}
+      style={style}
       title={title}
       bang={bang}
       onPress={handleOnPress}

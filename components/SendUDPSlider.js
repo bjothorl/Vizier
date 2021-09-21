@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import VerticalSlider from "rn-vertical-slider";
 
 import { sendUDP } from "../utility/udp";
 
-export default function SendUDPSlider({ style, address, port, name }) {
+export default function SendUDPSlider({ width, height, address, port, name }) {
   const [value, setValue] = useState(50);
 
   const handleValueChange = (value) => {
@@ -13,7 +13,7 @@ export default function SendUDPSlider({ style, address, port, name }) {
   };
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, { width: width }]}>
       <View style={styles.nameContainer}>
         <Text numberOfLines={2} style={styles.name}>
           {name}
@@ -28,8 +28,8 @@ export default function SendUDPSlider({ style, address, port, name }) {
           handleValueChange(value);
         }}
         onComplete={() => {}}
-        width={style.width - style.width / 4}
-        height={290}
+        width={width - width / 4}
+        height={(290 / 100) * height}
         step={1}
         borderRadius={5}
         minimumTrackTintColor={"gray"}
@@ -43,6 +43,7 @@ export default function SendUDPSlider({ style, address, port, name }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
+    backgroundColor: "lightgrey",
   },
   nameContainer: {
     width: "100%",

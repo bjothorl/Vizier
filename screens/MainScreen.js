@@ -26,12 +26,32 @@ export default function MainScreen({ route }) {
     setShowingEffectBox(!showingEffectBox);
   };
 
-  const handleEffectPress = (value) => {
-    setLastEffect(value);
+  const handleEffectPress = (id, toggle) => {
+    setLastEffect(id);
+    let effects = [...state.effects];
+    effects[id] = [toggle, effects[id][1], effects[id][2], effects[id][3]];
+    setState({
+      ...state,
+      effects: effects,
+    });
+    console.log(state.effects);
   };
 
   const handleEditEffects = (values) => {
     console.log(lastEffect, values);
+  };
+
+  const handleEffectSliderValueChange = (id, value) => {
+    console.log(id, value);
+    // clone current values
+    let effects = [...state.effects];
+    effects[lastEffect][id + 1] = value;
+
+    setState({
+      ...state,
+      effects: effects,
+    });
+    console.log(state.effects[lastEffect]);
   };
 
   const handleSliderValueChange = (id, value) => {
@@ -67,6 +87,7 @@ export default function MainScreen({ route }) {
             values: state.effects,
             lastEffect: lastEffect,
             onEditEffects: handleEditEffects,
+            onSliderChange: handleEffectSliderValueChange,
           })}
         />
       ) : (

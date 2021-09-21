@@ -18,7 +18,7 @@ export default function SendUDPButton({
     console.log(address, port);
     if (!bang) setToggle(!toggle);
     sendUDP({ data: toggle ? 0 : 1, address: address, port: port });
-    onPress(id);
+    onPress(id, toggle ? 0 : 1);
   };
 
   return (

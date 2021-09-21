@@ -5,6 +5,7 @@ import DMXGroupsView from "../components/DMXGroupsView";
 import SendUDPSlider from "../components/SendUDPSlider";
 import BoxView from "../components/BoxView";
 import EditEffectView from "../components/EditEffectView";
+import { getStateFromPath } from "@react-navigation/core";
 export default function MainScreen({ route }) {
   const [state, setState] = useState({
     effects: [
@@ -18,11 +19,28 @@ export default function MainScreen({ route }) {
     dmxGroups: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     sliders: [50, 50],
   });
-
   const [showingEffectBox, setShowingEffectBox] = useState(false);
+  const [lastEffect, setLastEffect] = useState(0);
 
-  const handleClickEffect = () => {
+  const handleEditPress = () => {
     setShowingEffectBox(!showingEffectBox);
+  };
+
+  const handleEffectPress = (value) => {
+    setLastEffect(value);
+  };
+
+  const handleEditEffects = (values) => {
+    console.log(lastEffect, values);
+  };
+
+  const handleSliderValueChange = (id, value) => {
+    let sliders = [...state.sliders];
+    sliders[id] = value;
+    setState({
+      ...state,
+      sliders,
+    });
   };
 
   return (
@@ -33,16 +51,22 @@ export default function MainScreen({ route }) {
         component={CameraView({
           address: route.params.address,
           port: 4450,
-          onEditPress: handleClickEffect,
+          onEditPress: handleEditPress,
+          onEffectPress: handleEffectPress,
+          values: state.effects,
+          lastEffect: lastEffect,
         })}
       />
       {showingEffectBox ? (
         <BoxView
-          title="EDIT EFFECT"
+          title={"EDIT EFFECT " + lastEffect}
           style={styles.dmxGroupsViewContainer}
           component={EditEffectView({
             address: route.params.address,
             port: 4480,
+            values: state.effects,
+            lastEffect: lastEffect,
+            onEditEffects: handleEditEffects,
           })}
         />
       ) : (
@@ -62,6 +86,8 @@ export default function MainScreen({ route }) {
           port={4444}
           width={80}
           height={100}
+          id={0}
+          onChange={handleSliderValueChange}
         />
         <SendUDPSlider
           name="audio sensitivity"
@@ -69,6 +95,8 @@ export default function MainScreen({ route }) {
           port={4445}
           width={80}
           height={100}
+          id={1}
+          onChange={handleSliderValueChange}
         />
       </View>
     </View>

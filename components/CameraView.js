@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, ImageBackground } from "react-native";
 import AppButton from "./AppButton";
 import SendUDPButton from "./SendUDPButton";
-export default function CameraView({ address, port, onEditPress }) {
+export default function CameraView({
+  address,
+  port,
+  onEditPress,
+  onEffectPress,
+  lastEffect,
+}) {
   // const address = "127.0.0.1";
-
   let buttons = [];
 
   for (let i = port; i < port + 6; i++) {
-    buttons.push({ id: i, address: address, port: i });
+    buttons.push({ address: address, port: i });
   }
 
   return (
@@ -20,7 +25,7 @@ export default function CameraView({ address, port, onEditPress }) {
           source={require("../assets/live.jpg")}
         >
           <AppButton
-            title="edit effect"
+            title={"edit effect " + lastEffect}
             style={styles.editEffectButton}
             onPress={onEditPress}
             bang={false}
@@ -29,14 +34,16 @@ export default function CameraView({ address, port, onEditPress }) {
       </View>
 
       <View style={styles.effectBank}>
-        {buttons.map(({ id, address, port }) => (
+        {buttons.map(({ address, port }, i) => (
           <SendUDPButton
+            key={i}
+            id={i}
             title={"effect\n" + port}
             address={address}
             port={port}
-            key={id}
             style={styles.button}
             bang={false}
+            onPress={onEffectPress}
           />
         ))}
       </View>

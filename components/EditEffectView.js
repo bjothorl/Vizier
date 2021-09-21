@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import SendUDPButton from "./SendUDPButton";
 import SendUDPSlider from "./SendUDPSlider";
-export default function EditEffectView({ address, port }) {
+export default function EditEffectView({ address, port, lastEffect }) {
   return (
     <View style={styles.container}>
       <SendUDPSlider

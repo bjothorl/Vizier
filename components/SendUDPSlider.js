@@ -4,12 +4,21 @@ import VerticalSlider from "rn-vertical-slider";
 
 import { sendUDP } from "../utility/udp";
 
-export default function SendUDPSlider({ width, height, address, port, name }) {
+export default function SendUDPSlider({
+  width,
+  height,
+  address,
+  port,
+  name,
+  id,
+  onChange,
+}) {
   const [value, setValue] = useState(50);
 
   const handleValueChange = (value) => {
     setValue(value);
     sendUDP({ data: value, address: address, port: port });
+    onChange(id, value);
   };
 
   return (

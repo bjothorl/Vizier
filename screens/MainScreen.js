@@ -5,21 +5,20 @@ import DMXGroupsView from "../components/DMXGroupsView";
 import SendUDPSlider from "../components/SendUDPSlider";
 import BoxView from "../components/BoxView";
 import EditEffectView from "../components/EditEffectView";
-import { getStateFromPath } from "@react-navigation/core";
+import {
+  //   storedLastEffect,
+  initialStore,
+  //   handleEditPress,
+  //   handleEffectPress,
+  //   handleEditEffects,
+  //   handleEffectSliderValueChange,
+  //   handleSliderValueChange,
+  //   handleDMXPress,
+} from "../utility/store";
+
 export default function MainScreen({ route }) {
   // https://reactjs.org/docs/hooks-reference.html#usereducer
-  const [state, setState] = useState({
-    effects: [
-      [false, 50, 50, 50],
-      [false, 50, 50, 50],
-      [false, 50, 50, 50],
-      [false, 50, 50, 50],
-      [false, 50, 50, 50],
-      [false, 50, 50, 50],
-    ],
-    dmxGroups: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    sliders: [50, 50],
-  });
+  const [state, setState] = useState(initialStore);
   const [showingEffectBox, setShowingEffectBox] = useState(false);
   const [lastEffect, setLastEffect] = useState(0);
 
@@ -64,6 +63,28 @@ export default function MainScreen({ route }) {
     });
   };
 
+  const handleDMXPress = (id, value) => {
+    let dmxGroups = [...state.dmxGroups];
+    dmxGroups[id] = value;
+    setState({
+      ...state,
+      dmxGroups: dmxGroups,
+    });
+    console.log(state.dmxGroups);
+  };
+
+  const handleBlackOutPress = () => {
+    let dmxGroups = [...state.dmxGroups];
+    dmxGroups.forEach((val, index, arr) => {
+      arr[index] = false;
+    });
+    setState({
+      ...state,
+      dmxGroups: dmxGroups,
+    });
+    console.log(state.dmxGroups);
+  };
+
   return (
     <View style={styles.container}>
       <BoxView
@@ -98,6 +119,9 @@ export default function MainScreen({ route }) {
           component={DMXGroupsView({
             address: route.params.address,
             port: 4460,
+            onDMXPress: handleDMXPress,
+            onBlackOutPress: handleBlackOutPress,
+            values: state.dmxGroups,
           })}
         />
       )}

@@ -26,6 +26,7 @@ export default function SendUDPButton({
       title={title}
       bang={bang}
       onPress={handleOnPress}
+      toggle={toggle}
     />
   );
 }

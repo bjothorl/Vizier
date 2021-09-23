@@ -39,7 +39,7 @@ export default function CameraView({
           <SendUDPButton
             key={i}
             id={i}
-            title={"effect\n" + port}
+            title={"effect " + i + "\n" + port}
             address={address}
             port={port}
             style={styles.button}

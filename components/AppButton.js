@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 
-export default function AppButton({ style, onPress, title, bang = true }) {
-  const [toggle, setToggle] = useState(false);
-
+export default function AppButton({
+  style,
+  onPress,
+  title,
+  bang = true,
+  toggle = false,
+}) {
   const handleOnPress = () => {
-    if (!bang) setToggle(!toggle);
     onPress();
   };
 

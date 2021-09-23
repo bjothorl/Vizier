@@ -1,31 +1,47 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import SendUDPButton from "./SendUDPButton";
-export default function DMXGroupsView({ address, port }) {
+export default function DMXGroupsView({
+  address,
+  port,
+  onDMXPress,
+  onBlackOutPress,
+  values,
+}) {
   let buttons = [];
 
-  for (let i = port; i < port + 11; i++) {
-    buttons.push({ id: i, address: address, port: i });
+  for (let i = 0; i < 11; i++) {
+    buttons.push({
+      id: i,
+      address: address,
+      port: port + i,
+      toggle: values[i],
+    });
   }
 
   return (
     <View style={styles.container}>
-      {buttons.map(({ id, address, port }, i) => (
+      {buttons.map(({ id, address, port, toggle }, i) => (
         <SendUDPButton
-          title={"DMX\n" + port}
+          title={"DMX " + id + "\n" + port}
           key={id}
+          id={id}
           address={address}
           port={port}
           style={styles.button}
           bang={false}
+          toggle={toggle}
+          onPress={onDMXPress}
         />
       ))}
       <SendUDPButton
-        title={"BLACK\nOUT\n" + 4471}
+        title={"BLACK\nOUT\n" + (port + 11)}
+        id={11}
         address={address}
         port={4471}
         style={styles.button}
-        bang={false}
+        bang={true}
+        onPress={onBlackOutPress}
       />
     </View>
   );

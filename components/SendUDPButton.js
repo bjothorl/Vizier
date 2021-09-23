@@ -12,13 +12,12 @@ export default function SendUDPButton({
   port,
   bang,
   onPress,
+  toggle,
 }) {
-  const [toggle, setToggle] = useState(false);
   const handleOnPress = () => {
     console.log(address, port);
-    if (!bang) setToggle(!toggle);
     sendUDP({ data: toggle ? 0 : 1, address: address, port: port });
-    onPress(id, toggle ? 0 : 1);
+    onPress(id, toggle ? false : true);
   };
 
   return (

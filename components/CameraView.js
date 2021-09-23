@@ -8,12 +8,13 @@ export default function CameraView({
   onEditPress,
   onEffectPress,
   lastEffect,
+  values,
 }) {
   // const address = "127.0.0.1";
   let buttons = [];
 
-  for (let i = port; i < port + 6; i++) {
-    buttons.push({ address: address, port: i });
+  for (let i = 0; i < 6; i++) {
+    buttons.push({ address: address, port: port + 1, toggle: values[i][0] });
   }
 
   return (
@@ -34,7 +35,7 @@ export default function CameraView({
       </View>
 
       <View style={styles.effectBank}>
-        {buttons.map(({ address, port }, i) => (
+        {buttons.map(({ address, port, toggle }, i) => (
           <SendUDPButton
             key={i}
             id={i}
@@ -44,6 +45,7 @@ export default function CameraView({
             style={styles.button}
             bang={false}
             onPress={onEffectPress}
+            toggle={toggle}
           />
         ))}
       </View>

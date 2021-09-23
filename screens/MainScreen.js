@@ -7,14 +7,15 @@ import BoxView from "../components/BoxView";
 import EditEffectView from "../components/EditEffectView";
 import { getStateFromPath } from "@react-navigation/core";
 export default function MainScreen({ route }) {
+  // https://reactjs.org/docs/hooks-reference.html#usereducer
   const [state, setState] = useState({
     effects: [
-      [0, 50, 50, 50],
-      [0, 50, 50, 50],
-      [0, 50, 50, 50],
-      [0, 50, 50, 50],
-      [0, 50, 50, 50],
-      [0, 50, 50, 50],
+      [false, 50, 50, 50],
+      [false, 50, 50, 50],
+      [false, 50, 50, 50],
+      [false, 50, 50, 50],
+      [false, 50, 50, 50],
+      [false, 50, 50, 50],
     ],
     dmxGroups: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     sliders: [50, 50],
@@ -109,6 +110,7 @@ export default function MainScreen({ route }) {
           height={100}
           id={0}
           onChange={handleSliderValueChange}
+          value={state.sliders[0]}
         />
         <SendUDPSlider
           name="audio sensitivity"
@@ -118,6 +120,7 @@ export default function MainScreen({ route }) {
           height={100}
           id={1}
           onChange={handleSliderValueChange}
+          value={state.sliders[1]}
         />
       </View>
     </View>

@@ -12,11 +12,9 @@ export default function SendUDPSlider({
   name,
   id,
   onChange,
+  value,
 }) {
-  const [value, setValue] = useState(50);
-
   const handleValueChange = (value) => {
-    setValue(value);
     sendUDP({ data: value, address: address, port: port });
     onChange(id, value);
   };
@@ -31,7 +29,7 @@ export default function SendUDPSlider({
       <VerticalSlider
         value={value}
         disabled={false}
-        min={0}
+        min={1}
         max={100}
         onChange={(value) => {
           handleValueChange(value);

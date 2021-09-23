@@ -2,7 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import SendUDPButton from "./SendUDPButton";
 import SendUDPSlider from "./SendUDPSlider";
-export default function EditEffectView({ address, port, onSliderChange }) {
+export default function EditEffectView({
+  address,
+  port,
+  onSliderChange,
+  values,
+  lastEffect,
+}) {
   return (
     <View style={styles.container}>
       <SendUDPSlider
@@ -13,6 +19,7 @@ export default function EditEffectView({ address, port, onSliderChange }) {
         width={80} // width in px
         height={90} // height in %
         onChange={onSliderChange}
+        value={values[lastEffect][1]}
       />
       <SendUDPSlider
         id={1}
@@ -22,6 +29,7 @@ export default function EditEffectView({ address, port, onSliderChange }) {
         width={80}
         height={90}
         onChange={onSliderChange}
+        value={values[lastEffect][2]}
       />
       <SendUDPSlider
         id={2}
@@ -31,6 +39,7 @@ export default function EditEffectView({ address, port, onSliderChange }) {
         width={80}
         height={90}
         onChange={onSliderChange}
+        value={values[lastEffect][3]}
       />
     </View>
   );

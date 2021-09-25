@@ -1,8 +1,12 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RNCamera } from "react-native-camera";
 
 export default class CameraViewExample extends PureComponent {
+  state = {
+    imageUrl: null,
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -29,6 +33,9 @@ export default class CameraViewExample extends PureComponent {
         <View
           style={{ flex: 0, flexDirection: "row", justifyContent: "center" }}
         >
+          {this.state.imageUrl && (
+            <Image style={styles.img} source={{ uri: this.state.imageUrl }} />
+          )}
           <TouchableOpacity
             onPress={this.takePicture.bind(this)}
             style={styles.capture}
@@ -44,6 +51,7 @@ export default class CameraViewExample extends PureComponent {
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options);
+      this.setState({ imageUrl: data.uri });
       console.log(data.uri);
     }
   };
@@ -68,5 +76,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignSelf: "center",
     margin: 20,
+  },
+  img: {
+    position: "absolute",
+    bottom: 100,
+    width: 300,
+    height: 200,
   },
 });

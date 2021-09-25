@@ -6,6 +6,7 @@ import MainNavigator from "./navigation/MainNavigator";
 
 import theme from "./navigation/theme";
 import CameraViewExample from "./CameraViewExample";
+import MainScreen from "./screens/MainScreen";
 
 export default function App(props) {
   return (

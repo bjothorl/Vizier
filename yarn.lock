@@ -5568,6 +5568,11 @@
   dependencies:
     "warn-once" "^0.1.0"
 
+"react-native-static-server@^0.5.0":
+  "integrity" "sha512-RGteckPoBZq48p9Y8V67bjZGPxLHKkEOAffLSUJiGC7hkx+H+zuekqCR+04F30NuWB7y+nb8N7Qld2RGjX5DNg=="
+  "resolved" "https://registry.npmjs.org/react-native-static-server/-/react-native-static-server-0.5.0.tgz"
+  "version" "0.5.0"
+
 "react-native-udp@^4.1.2":
   "integrity" "sha512-earOd1Geim9jl/rfoS605YLOzgK1+wgJn4y3WlsJNKTC+cpIPDLN7Cwpx55SmBgQ9C9r+G7NVD8m1quhQhwNYg=="
   "resolved" "https://registry.npmjs.org/react-native-udp/-/react-native-udp-4.1.3.tgz"

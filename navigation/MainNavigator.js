@@ -10,14 +10,15 @@ export default function MainNavigator(props) {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
+        name="Main"
+        component={MainScreen}
+        initialParams={{ address: "127.0.0.1" }}
+        options={{ orientation: "landscape_left" }}
+      />
+      <Stack.Screen
         name="Connect"
         component={ConnectScreen}
         options={{ orientation: "portrait" }}
-      />
-      <Stack.Screen
-        name="Main"
-        component={MainScreen}
-        options={{ orientation: "landscape_left" }}
       />
     </Stack.Navigator>
   );

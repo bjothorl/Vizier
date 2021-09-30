@@ -13,10 +13,18 @@ export default function SendUDPButton({
   bang,
   onPress,
   toggle,
+  blackOut,
+  blackOutStartPort,
 }) {
   const handleOnPress = () => {
     console.log(address, port);
-    sendUDP({ data: toggle ? 0 : 1, address: address, port: port });
+    if (blackOut) {
+      for (let i = 0; i < 11; i++) {
+        sendUDP({ data: 0, address: address, port: blackOutStartPort + i });
+      }
+    } else {
+      sendUDP({ data: toggle ? 0 : 1, address: address, port: port });
+    }
     onPress(id, toggle ? false : true);
   };
 

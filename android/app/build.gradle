@@ -125,6 +125,8 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    sourceSets { main { assets.srcDirs = ['src/main/assets', '../../assets'] } }
+    
     defaultConfig {
         applicationId "com.app"
         minSdkVersion rootProject.ext.minSdkVersion

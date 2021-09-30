@@ -15,7 +15,7 @@ export default function EditEffectView({
         id={0}
         name="feature 1"
         address={address}
-        port={port}
+        port={port + lastEffect * 3}
         width={80} // width in px
         height={90} // height in %
         onChange={onSliderChange}
@@ -25,7 +25,7 @@ export default function EditEffectView({
         id={1}
         name="feature 2"
         address={address}
-        port={port}
+        port={port + lastEffect * 3 + 1}
         width={80}
         height={90}
         onChange={onSliderChange}
@@ -35,7 +35,7 @@ export default function EditEffectView({
         id={2}
         name="feature 3"
         address={address}
-        port={port}
+        port={port + lastEffect * 3 + 2}
         width={80}
         height={90}
         onChange={onSliderChange}

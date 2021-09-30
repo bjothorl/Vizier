@@ -36,6 +36,8 @@ export default function DMXGroupsView({
       ))}
       <SendUDPButton
         title={"BLACK\nOUT\n" + (port + 11)}
+        blackOut={true}
+        blackOutStartPort={port}
         id={11}
         address={address}
         port={4471}

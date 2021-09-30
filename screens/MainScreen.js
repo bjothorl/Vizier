@@ -82,7 +82,7 @@ export default function MainScreen({ route }) {
       ...state,
       dmxGroups: dmxGroups,
     });
-    console.log(state.dmxGroups);
+    console.log(dmxGroups);
   };
 
   return (

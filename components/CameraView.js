@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, ImageBackground } from "react-native";
-import CameraViewExample from "../CameraViewExample";
+import WebView from "react-native-webview";
 import AppButton from "./AppButton";
-import RNCameraView from "./RNCameraView";
 import SendUDPButton from "./SendUDPButton";
 export default function CameraView({
   address,
@@ -14,22 +13,28 @@ export default function CameraView({
 }) {
   // const address = "127.0.0.1";
   let buttons = [];
-
+  const [editEffectToggle, setEditEffectToggle] = useState(false);
   for (let i = 0; i < 6; i++) {
-    buttons.push({ address: address, port: port + 1, toggle: values[i][0] });
+    buttons.push({ address: address, port: port + i, toggle: values[i][0] });
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.cameraContainer}>
-        <RNCameraView style={styles.cameraView}>
-          <AppButton
-            title={"edit effect " + lastEffect}
-            style={styles.editEffectButton}
-            onPress={onEditPress}
-            bang={false}
-          />
-        </RNCameraView>
+        <WebView
+          style={styles.cameraView}
+          source={{ uri: "http://localhost:8080/video" }}
+        ></WebView>
+        <AppButton
+          title={"edit effect " + lastEffect}
+          style={styles.editEffectButton}
+          onPress={() => {
+            onEditPress();
+            setEditEffectToggle(!editEffectToggle);
+          }}
+          bang={false}
+          toggle={editEffectToggle}
+        />
       </View>
 
       <View style={styles.effectBank}>
@@ -64,6 +69,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     width: "100%",
     height: "100%",
+    transform: [{ rotate: "180deg" }],
   },
   effectBank: {
     flex: 1,
@@ -79,8 +85,8 @@ const styles = StyleSheet.create({
   },
   editEffectButton: {
     width: "27%",
-    height: "20%",
-    margin: 5,
+    height: 50,
+    marginTop: -50,
     alignSelf: "flex-end",
   },
 });
